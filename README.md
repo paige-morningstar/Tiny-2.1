@@ -15,6 +15,22 @@ Pentium or 486DX under plain DOS and fits on a floppy disk.
 
 Written by Fable 5.2 and trained by Opus 5.5.
 
+## Download for the 3DS
+
+[![One-click download](https://img.shields.io/badge/download-tiny21.cia-2ea44f?style=for-the-badge)](https://github.com/paige-morningstar/Tiny-2.1/releases/download/v1.0/tiny21.cia)
+
+One click gets you **`tiny21.cia`** (641 KB). Install it with FBI (Titles → SD,
+or any title manager), then launch **TINY 2.1** from the home menu. Custom
+firmware (Luma3DS) required. The network and its 380 KB of weights are inside
+the title, so nothing else has to be copied to the SD card.
+
+To install straight from the 3DS, open **FBI → Remote Install → Scan QR Code**
+and point the camera at this:
+
+![QR code that downloads tiny21.cia](qr-cia.png)
+
+Or copy the direct link: <https://github.com/paige-morningstar/Tiny-2.1/releases/download/v1.0/tiny21.cia>
+
 ## Run
 
 ```
