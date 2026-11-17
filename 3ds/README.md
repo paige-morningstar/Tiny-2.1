@@ -1,7 +1,7 @@
 # TINY 2.1 for the Nintendo 3DS
 
-A libctru port of the DOS program: the same 367,000-weight transformer in
-`TINY.BIN`, running as a Homebrew Launcher app.
+A libctru port of TINY 2.1: a 367,000-weight transformer in `romfs/TINY.BIN`,
+running as a Homebrew Launcher app or an installed title.
 
 - The conversation is on the top screen, the neural monitor on the bottom one
 - The 3DS software keyboard asks the question (A)
@@ -72,5 +72,5 @@ PC too:
 
 ```
 cc -O2 -Iinclude -o tiny_host source/tiny_model.c tools/host_test.c -lm
-./tiny_host ../TINY.BIN
+./tiny_host romfs/TINY.BIN
 ```

@@ -1,21 +1,12 @@
-# TINY 2.1 — a transformer for DOS
+# TINY 2.1 for the Nintendo 3DS
 
-![TINY 2.1 running under DOS](tiny21.png)
+A 367,000-parameter transformer — 4 layers, 96 wide, 8-bit weights, letters in
+and letters out — running on a 3DS as an ordinary homebrew title. The
+conversation is on the top screen, a live neural monitor on the bottom one, the
+3DS software keyboard takes the question, and the robot voice is synthesised
+into the DSP.
 
-A tiny question-answering transformer written in Turbo C 2.0. It runs on a
-Pentium or 486DX under plain DOS and fits on a floppy disk.
-
-- 367,000 parameters: 4 layers, 96 wide, reads and writes letter by letter
-- 8-bit weights (one scale per row), 380 KB in all
-- Needs about 540 KB of free conventional memory
-- Trained on about 3,500 facts, each asked in many wordings
-  Outside those it makes things up confidently
-- Neon full-screen interface with a live neural monitor and a PC-speaker
-  robot voice
-
-Written by Fable 5.2 and trained by Opus 5.5.
-
-## Download for the 3DS
+## Download
 
 [![One-click download](https://img.shields.io/badge/download-tiny21.cia-2ea44f?style=for-the-badge)](https://github.com/paige-morningstar/Tiny-2.1/releases/download/v1.0/tiny21.cia)
 
@@ -31,30 +22,49 @@ and point the camera at this:
 
 Or copy the direct link: <https://github.com/paige-morningstar/Tiny-2.1/releases/download/v1.0/tiny21.cia>
 
-## Run
+The title ID is `0x000400000F716900`, so it installs alongside anything else and
+updates over itself.
+
+## Controls
+
+| Button | Does |
+| --- | --- |
+| A | ask a question |
+| SELECT | help |
+| X | sound on/off |
+| Y | robot voice on/off |
+| L / R | creativity 0-9 (0 = always the surest answer) |
+| Up | ask the last question again |
+| B | stop the voice, or stop a long answer |
+| START | quit |
+
+Typing `HELP`, `CLS`, `QUIT` or `EXIT` as the question does the obvious thing.
+
+## Build from source
+
+Needs devkitPro with devkitARM and libctru. Everything lives in `3ds/`:
 
 ```
-C:\> CD \TINY
-C:\TINY> TINY
+cd 3ds
+make        # tiny21.3dsx + tiny21.smdh for the Homebrew Launcher
+make cia    # tiny21.cia, needs makerom on the PATH
 ```
 
-Keep `TINY.EXE` and `TINY.BIN` in the same folder. To rebuild:
-`TCC -ml TINY.C`
+`make cia` builds the title from the banner, icon and tune already committed in
+`3ds/assets/`, so makerom is the only extra tool required.
 
-## On a Nintendo 3DS
-
-`3ds/` holds a libctru port of the same network, built as a Homebrew Launcher
-app: the conversation on the top screen, the neural monitor on the bottom one,
-the 3DS software keyboard for questions, and the robot voice synthesised into
-the DSP. The model is embedded in the app, so it ships as one file.
+## What is in here
 
 ```
-cd 3ds && make      # needs devkitPro (devkitARM + libctru)
-cd 3ds && make cia  # also needs makerom, for an installable title
+3ds/source/tiny_model.c   the network: no 3DS and no DOS code in it
+3ds/source/main.c         the 3DS front end: screens, keyboard, voice
+3ds/include/              the model's interface
+3ds/romfs/TINY.BIN        the trained weights, embedded into the app
+3ds/assets/               banner, icon and banner tune
+3ds/tiny.rsf              the ROM spec for the CIA
+3ds/tools/                banner generator, and a host test for the network
 ```
 
-Copy `3ds/tiny21.3dsx` to the SD card and open it from the Homebrew Launcher,
-or install `3ds/tiny21.cia` with FBI so it lives on the home menu as a normal
-title (title ID `0x000400000F716900`, needs CFW). Both carry the network
-inside, and both will use a retrained `TINY.BIN` placed at
-`sdmc:/3ds/TINY/TINY.BIN`. See `3ds/README.md` for the button map.
+Because `tiny_model.c` is portable, the network also runs on a PC for testing —
+see `3ds/README.md`, which also covers the SD-card override
+(`sdmc:/3ds/TINY/TINY.BIN`) for a retrained model.
