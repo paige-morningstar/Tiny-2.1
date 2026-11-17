@@ -68,3 +68,8 @@ make cia    # tiny21.cia, needs makerom on the PATH
 Because `tiny_model.c` is portable, the network also runs on a PC for testing —
 see `3ds/README.md`, which also covers the SD-card override
 (`sdmc:/3ds/TINY/TINY.BIN`) for a retrained model.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Use it, fork it, ship it in your own build;
+just keep the copyright notice.
