@@ -1,7 +1,7 @@
 /* host_test.c - builds and runs the 3DS model code on a PC, so the port can
    be checked without a console:
        cc -O2 -Iinclude -o tiny_host source/tiny_model.c tools/host_test.c -lm
-       ./tiny_host ../TINY.BIN
+       ./tiny_host romfs/TINY.BIN
 */
 
 #include <stdio.h>
